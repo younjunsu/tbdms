@@ -1,0 +1,44 @@
+#!/bin/sh
+############################################################
+#
+# Program history
+############################################################
+# Created by. Daejeon Office
+# 2022.08.30 Yoon Jun Su
+
+############################################################
+# tbms
+# Shell configuration
+############################################################
+# Shell check
+TBMS_SHELL_RUN(){
+    SHELL_CHECK=`uname -a |grep -i Ubuntu`
+
+    if [ -n "$SHELL_CHECK" ]
+    then
+        export TBMS_SHELL="bash"
+        bash ./tbms.main
+        
+    else
+        export TBMS_SHELL="sh"
+        sh ./tbms.main
+    fi
+}
+
+# Shell  running
+case $1 in
+    "")
+        TBMS_SHELL_RUN;;
+    "-bash"|"--bash"|"bash")
+        export TBMS_SHELL="bash"
+        bash ./tbms.main;;
+    *)
+        echo
+        echo "[*] TIBERO Migration Scripts"
+        echo "-----------------------------------------------------------------"
+        echo "Usage: ./tbms [OPTION]"
+        echo "-----------------------------------------------------------------"
+        echo "-bash --bash          default: sh"
+        echo "-----------------------------------------------------------------"
+        echo
+esac
