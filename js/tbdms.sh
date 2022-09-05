@@ -5,7 +5,7 @@
 file_path_export_script="total_full.log"
 
 # output file directory
-file_path_generator="obj"
+file_path_generator="migmigmig"
 mkdir -p "$file_path_generator"
 
 # exporting type file array
