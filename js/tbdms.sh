@@ -2,10 +2,10 @@
 # tbexport generator tool
 ################################
 # tbexport script=y file
-file_path_export_script="total_full.log"
+file_path_export_script=""
 
 # output file directory
-file_path_generator="migmigmig"
+file_path_generator=""
 mkdir -p "$file_path_generator"
 
 # exporting type file array
