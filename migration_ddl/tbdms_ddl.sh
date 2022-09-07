@@ -5,20 +5,22 @@
 file_path_export_script=""
 
 # output file directory
-file_path_generator=""
+file_path_generator="res"
 mkdir -p "$file_path_generator"
 
 # exporting type file array
-cat "\--" $file_path_export_script |grep "exporting"|grep "\--   e" |sed 's/--//g' |sed 's/"//g' |sed 's/  //g' |awk '{print "export_type["NR"]=\""$0"\""}' > tbdms_type.env
-cat  $file_path_export_script |grep -n "\--   exporting" |sed 's/:/ /g' |awk '{print "export_type_gap["NR"]=\""$1"\""}' > tbdms_type_gap.env
+tbdms_type="log/tbdms_type.env"
+tbdms_type_gap="log/tbdms_type_gap.env"
+cat  $file_path_export_script |grep "exporting"|grep "\--   e" |sed 's/--//g' |sed 's/"//g' |sed 's/  //g' |awk '{print "export_type["NR"]=\""$0"\""}' > $tbdms_type
+cat  $file_path_export_script |grep -n "\--   exporting" |sed 's/:/ /g' |awk '{print "export_type_gap["NR"]=\""$1"\""}' > $tbdms_type_gap
 
 # apply env
-. tbdms_type.env
-. tbdms_type_gap.env
+. $tbdms_type
+. $tbdms_type_gap
 
 # env file remove
-rm -f tbdms_type.env
-rm -f tbdms_type_gap.env
+rm -f $tbdms_type
+rm -f $tbdms_type_gap
 
 # generator loop
 export_type_count=`grep "\--" $file_path_export_script  |grep "exporting" |grep "\--   e" |wc -l`
